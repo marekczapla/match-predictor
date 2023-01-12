@@ -1,27 +1,30 @@
-package pl.markopolo.matchpredictor.models;
+package pl.markopolo.matchpredictor.security;
 
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import pl.markopolo.matchpredictor.models.User;
 
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.List;
 import java.util.stream.Collectors;
 
+@NoArgsConstructor
 public class MyUserDetails implements UserDetails {
 
-    private String userName;
+    private String username;
     private String password;
     private boolean isActive;
-    private List<GrantedAuthority> authorities;
+    private Collection<? extends GrantedAuthority> authorities;
+
+    private final static String ROLE_PREFIX = "ROLE_";
 
     public MyUserDetails(User user) {
-        this.userName = user.getUserName();
+        this.username = user.getUsername();
         this.password = user.getPassword();
         this.isActive = user.isActive();
-        this.authorities = Arrays.stream(user.getRoles().split(","))
-                .map(SimpleGrantedAuthority::new)
+        this.authorities = user.getRoles().stream()
+                .map((role) -> new SimpleGrantedAuthority(ROLE_PREFIX + role.getName()))
                 .collect(Collectors.toList());
     }
 
@@ -37,7 +40,7 @@ public class MyUserDetails implements UserDetails {
 
     @Override
     public String getUsername() {
-        return userName;
+        return username;
     }
 
     @Override

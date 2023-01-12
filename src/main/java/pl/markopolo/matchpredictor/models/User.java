@@ -1,68 +1,56 @@
 package pl.markopolo.matchpredictor.models;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.SuperBuilder;
+
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.util.List;
 
+@SuperBuilder
 @Entity
-@Table(name = "User")
+@Table(name = "user")
+@NoArgsConstructor
+@Getter
 public class User {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
-    @Column
-    private String userName;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
+
+    @Column(name = "username")
+    @Setter
+    private String username;
+
+    @Column(name = "password")
+    @Setter
     private String password;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "user_role",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+
+    @Setter
+    private List<Role> roles;
+
+    @Column(name = "first_name")
+    private String firstName;
+
+    @Column(name = "last_name")
+    private String lastName;
+
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "date_of_birth")
+    private LocalDate dob;
+
+    @Column(name = "active")
+    @Setter
     private boolean isActive;
-    private String roles;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public boolean isActive() {
-        return isActive;
-    }
-
-    public void setActive(boolean active) {
-        isActive = active;
-    }
-
-    public String getRoles() {
-        return roles;
-    }
-
-    public void setRoles(String roles) {
-        this.roles = roles;
-    }
-
-    public User() {
-
-    }
-
-    public User(int id, String userName, String password, boolean isActive, String roles) {
-        this.id = id;
-        this.userName = userName;
-        this.password = password;
-        this.isActive = isActive;
-        this.roles = roles;
-    }
 }
+
