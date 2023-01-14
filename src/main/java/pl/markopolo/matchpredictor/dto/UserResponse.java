@@ -21,5 +21,6 @@ public class UserResponse {
     private String email;
     private LocalDate dob;
     private boolean isEnabled;
+    private int points;
 
 }

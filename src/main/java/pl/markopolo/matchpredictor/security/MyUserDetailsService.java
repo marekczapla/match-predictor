@@ -7,7 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import pl.markopolo.matchpredictor.UserRepository;
+import pl.markopolo.matchpredictor.repositories.UserRepository;
 import pl.markopolo.matchpredictor.models.User;
 
 @RequiredArgsConstructor

@@ -52,5 +52,10 @@ public class User {
     @Column(name = "active")
     @Setter
     private boolean isActive;
+
+    @Column(name = "points")
+    @Setter
+    private int points;
+
 }
 

@@ -11,7 +11,8 @@ import pl.markopolo.matchpredictor.exceptions.PermissionDeniedException;
 import pl.markopolo.matchpredictor.exceptions.ResourceNotFoundException;
 import pl.markopolo.matchpredictor.models.Role;
 import pl.markopolo.matchpredictor.models.User;
-import pl.markopolo.matchpredictor.UserMapper;
+import pl.markopolo.matchpredictor.repositories.RoleRepository;
+import pl.markopolo.matchpredictor.repositories.UserRepository;
 
 import javax.transaction.Transactional;
 import java.security.Principal;

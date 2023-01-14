@@ -58,6 +58,7 @@ public class UserMapper {
                                 .email(user.getEmail())
                                 .dob(user.getDob())
                                 .isEnabled(user.isActive())
+                                .points(user.getPoints())
                                 .build())
                 .collect(Collectors.toList());
     }
