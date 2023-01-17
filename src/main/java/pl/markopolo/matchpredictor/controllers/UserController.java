@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import pl.markopolo.matchpredictor.MyUserService;
+import pl.markopolo.matchpredictor.service.MyUserService;
 import pl.markopolo.matchpredictor.dto.UserRequest;
 import pl.markopolo.matchpredictor.models.Response;
 

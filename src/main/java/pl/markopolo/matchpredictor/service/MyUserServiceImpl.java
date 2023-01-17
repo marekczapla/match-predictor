@@ -1,10 +1,11 @@
-package pl.markopolo.matchpredictor;
+package pl.markopolo.matchpredictor.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import pl.markopolo.matchpredictor.mapper.UserMapper;
 import pl.markopolo.matchpredictor.dto.UserRequest;
 import pl.markopolo.matchpredictor.dto.UserResponse;
 import pl.markopolo.matchpredictor.exceptions.PermissionDeniedException;

@@ -1,4 +1,4 @@
-package pl.markopolo.matchpredictor;
+package pl.markopolo.matchpredictor.service;
 
 import pl.markopolo.matchpredictor.dto.UserRequest;
 import pl.markopolo.matchpredictor.dto.UserResponse;

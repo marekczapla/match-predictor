@@ -12,10 +12,10 @@ import javax.persistence.*;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Predictions {
+public class Prediction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long predictedMatchId;
+    private Long matchId;
     @Column
     @Setter
     private int userHomeGoals;
@@ -31,4 +31,5 @@ public class Predictions {
     @Column
     @Setter
     private int userMatchPoints;
+
 }
