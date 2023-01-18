@@ -1,13 +1,14 @@
 package pl.markopolo.matchpredictor.service;
 
 import pl.markopolo.matchpredictor.dto.MatchRequest;
+import pl.markopolo.matchpredictor.dto.MatchResponse;
 import pl.markopolo.matchpredictor.models.Match;
 
 import java.util.List;
 
 public interface MatchService {
 
-    List<Match> findAllMatches();
+    List<MatchResponse> findAllMatches();
 
     Match findMatchById(Long matchId);
 

@@ -2,7 +2,9 @@ package pl.markopolo.matchpredictor.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import pl.markopolo.matchpredictor.dto.MatchResponse;
 import pl.markopolo.matchpredictor.mapper.MatchMapper;
 import pl.markopolo.matchpredictor.dto.MatchRequest;
 import pl.markopolo.matchpredictor.exceptions.ResourceNotFoundException;
@@ -21,9 +23,11 @@ public class MatchServiceImpl implements MatchService {
     private final MatchRepository matchRepository;
 
     @Override
-    public List<Match> findAllMatches() {
-        log.info("Getting list of all matches");
-        return null;
+    public List<MatchResponse> findAllMatches() {
+        log.info("Retrieving list of all matches");
+        List<Match> matches = matchRepository.findAll(Sort.by("startTime"));
+        return MatchMapper.mapMatchListToMatchResponseList(matches);
+
     }
 
     @Override
@@ -53,7 +57,7 @@ public class MatchServiceImpl implements MatchService {
 
     @Override
     public boolean deleteMatchById(Long matchId) {
-        log.info("Deleting trainer with id: {}", matchId);
+        log.info("Deleting match with id: {}", matchId);
         Match match = matchRepository.findById(matchId).orElseThrow(() ->
                 new ResourceNotFoundException(String.format("Match with id: %s not found", matchId)));
 

@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import pl.markopolo.matchpredictor.models.Prediction;
 
 @Repository
-public interface PredictionsRepository extends JpaRepository<Prediction, Long> {
+public interface PredictionRepository extends JpaRepository<Prediction, Long> {
 }
