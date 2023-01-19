@@ -1,12 +1,18 @@
 package pl.markopolo.matchpredictor.dto;
 
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+@Getter
+@SuperBuilder
+@NoArgsConstructor
 public class PredictionRequest {
 
     private Long matchId;
