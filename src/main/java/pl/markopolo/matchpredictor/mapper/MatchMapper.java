@@ -2,7 +2,6 @@ package pl.markopolo.matchpredictor.mapper;
 
 import pl.markopolo.matchpredictor.dto.MatchRequest;
 import pl.markopolo.matchpredictor.dto.MatchResponse;
-import pl.markopolo.matchpredictor.dto.PredictionResponse;
 import pl.markopolo.matchpredictor.models.Match;
 
 import java.util.List;

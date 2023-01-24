@@ -7,6 +7,7 @@ import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "user_prediction")
@@ -18,6 +19,8 @@ public class Prediction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long matchId;
+    @Column
+    private LocalDateTime startTime;
     @Column
     @Setter
     private int userHomeGoals;

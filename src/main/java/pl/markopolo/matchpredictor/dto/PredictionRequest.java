@@ -1,5 +1,6 @@
 package pl.markopolo.matchpredictor.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,6 +10,7 @@ import org.hibernate.validator.constraints.Length;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 
 @Getter
 @SuperBuilder
@@ -17,10 +19,14 @@ public class PredictionRequest {
 
     private Long matchId;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+    private LocalDateTime startTime;
+
     @Min(value = 0, message = "Must be min 0")
     @NotNull(message = "Cannot be empty")
     @ApiModelProperty(notes = "User prediction of Home Team goals", example = "2")
     private int userHomeGoals;
+
     @Min(value = 0, message = "Must be min 0")
     @NotNull(message = "Cannot be empty")
     @ApiModelProperty(notes = "User prediction of Away Team goals", example = "2")

@@ -8,6 +8,7 @@ import lombok.experimental.SuperBuilder;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 
 @SuperBuilder
 @Entity
@@ -52,10 +53,6 @@ public class User {
     @Column(name = "active")
     @Setter
     private boolean isActive;
-
-    @Column(name = "points")
-    @Setter
-    private int points;
 
 }
 

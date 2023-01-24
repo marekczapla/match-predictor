@@ -5,12 +5,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import pl.markopolo.matchpredictor.dto.PredictionRequest;
+import pl.markopolo.matchpredictor.exceptions.InvalidMatchDateException;
 import pl.markopolo.matchpredictor.exceptions.ResourceNotFoundException;
 import pl.markopolo.matchpredictor.mapper.PredictionMapper;
 import pl.markopolo.matchpredictor.models.Prediction;
 import pl.markopolo.matchpredictor.repositories.PredictionRepository;
 
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -37,6 +39,9 @@ public class PredictionServiceImpl implements PredictionService {
     @Override
     public Prediction createPrediction(PredictionRequest predictionRequest) {
         log.info("Creating prediction");
+        if (predictionRequest.getStartTime().isAfter(LocalDateTime.now())) {
+            throw new InvalidMatchDateException("The match has already started");
+        }
         Prediction prediction = PredictionMapper.mapPredictionToPredictionRequestCreate(predictionRequest);
         return predictionRepository.save(prediction);
     }
@@ -48,6 +53,10 @@ public class PredictionServiceImpl implements PredictionService {
             if (predictionRepository.findById(predictionRequest.getMatchId()).isEmpty()) {
                 throw new ResourceNotFoundException(
                         String.format("Match prediction with id: %s not found", predictionRequest.getMatchId()));
+            }
+
+            if (predictionRequest.getStartTime().isAfter(LocalDateTime.now())) {
+                throw new InvalidMatchDateException("The match has already started");
             }
 
             Prediction prediction = PredictionMapper.mapPredictionRequestToPredictionUpdate(predictionRequest);
