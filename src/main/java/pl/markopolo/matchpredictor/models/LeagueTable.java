@@ -10,7 +10,7 @@ import java.util.Objects;
 
 @SuperBuilder
 @Entity
-@Table(name = "user")
+@Table(name = "league_table")
 @NoArgsConstructor
 @Getter
 public class LeagueTable {

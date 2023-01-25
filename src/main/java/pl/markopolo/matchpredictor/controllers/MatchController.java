@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 import java.util.Map;
 
 @RestController
-@RequestMapping("api/v1/matches")
+@RequestMapping("/matches")
 @RequiredArgsConstructor
 public class MatchController {
 
@@ -55,7 +55,7 @@ public class MatchController {
             "Allows to register new match in the system.")
     public ResponseEntity<Response> createMatch(@Valid @RequestBody MatchRequest matchRequest) {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/api/v1/matches").toUriString());
+                .path("/matches").toUriString());
         return ResponseEntity.created(uri).body(Response.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.CREATED)

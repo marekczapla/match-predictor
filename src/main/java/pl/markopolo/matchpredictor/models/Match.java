@@ -33,7 +33,7 @@ public class Match {
     @Setter
     @Column
     private int awayGoals;
-    @ManyToOne
+    @OneToMany
     @JoinTable(name = "match_player",
             joinColumns = @JoinColumn(name = "match_id"),
             inverseJoinColumns = @JoinColumn(name = "player_id"))
