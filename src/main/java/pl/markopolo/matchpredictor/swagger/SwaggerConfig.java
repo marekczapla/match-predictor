@@ -20,7 +20,7 @@ import static pl.markopolo.matchpredictor.swagger.SwaggerConstants.*;
 
 
 @Configuration
-public class SwaggerConfiguration {
+public class SwaggerConfig {
 
     @Bean
     public Docket getDocket() {
@@ -31,7 +31,13 @@ public class SwaggerConfiguration {
                 .select()
                 .apis(RequestHandlerSelectors.withClassAnnotation(RestController.class))
                 .build()
-                .tags(new Tag(USERS_API_TAG, "APIs related to users"));
+                .tags(new Tag(USERS_API_TAG, "APIs related to users"),
+                        new Tag(MATCH_API_TAG, "APIs related to matches classes"),
+                        new Tag(PREDICTION_API_TAG, "APIs related to predictions classes"),
+                        new Tag(LEAGUE_TABLE_API_TAG, "APIs related to league table classes")
+                );
+
+
     }
 
     private ApiKey apiKey() {

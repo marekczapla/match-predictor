@@ -33,4 +33,7 @@ public class SwaggerConstants {
     public static final String API_LICENSE = null;
     public static final String API_LICENSE_URL = null;
     public static final String USERS_API_TAG = "Users service";
+    public static final String MATCH_API_TAG = "Match service";
+    public static final String PREDICTION_API_TAG = "Prediction service";
+    public static final String LEAGUE_TABLE_API_TAG = "League table service";
 }

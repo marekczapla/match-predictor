@@ -1,9 +1,15 @@
 package pl.markopolo.matchpredictor.dto;
 
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import javax.validation.constraints.Min;
 
+@Getter
+@SuperBuilder
+@NoArgsConstructor
 public class LeagueTableRequest {
 
     private Long userId;

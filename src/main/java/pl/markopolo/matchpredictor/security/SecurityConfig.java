@@ -5,9 +5,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -24,7 +26,7 @@ import static pl.markopolo.matchpredictor.security.SecurityConstant.SWAGGER_URL;
 @EnableWebSecurity
 @RequiredArgsConstructor
 @EnableGlobalMethodSecurity(prePostEnabled = true)
-public class SecurityConfiguration extends AbstractHttpConfigurer<SecurityConfiguration, HttpSecurity> {
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final UserDetailsService userDetailsService;
 
@@ -35,11 +37,9 @@ public class SecurityConfiguration extends AbstractHttpConfigurer<SecurityConfig
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        AuthenticationManager authenticationManager =
-                http.getSharedObject(AuthenticationManager.class);
 
         CustomAuthenticationFilter customAuthenticationFilter =
-                new CustomAuthenticationFilter(authenticationManager);
+                new CustomAuthenticationFilter(authenticationManagerBean());
         customAuthenticationFilter.setFilterProcessesUrl(LOGIN_URL);
         http.addFilter(customAuthenticationFilter);
 
@@ -47,9 +47,10 @@ public class SecurityConfiguration extends AbstractHttpConfigurer<SecurityConfig
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers(POST, "/api/v1/users").permitAll()
-                .antMatchers(GET, "/api/v1/predict/**").permitAll()
-                .antMatchers(GET, "/api/v1/table/**").permitAll()
+                .antMatchers(POST, "/users").permitAll()
+                .antMatchers(GET, "/prediction/**").permitAll()
+                .antMatchers(POST, "/prediction/**").permitAll()
+                .antMatchers(GET, "/table/**").permitAll()
                 .antMatchers(SWAGGER_URL).permitAll()
                 .anyRequest().authenticated()
                 .and()
@@ -65,5 +66,15 @@ public class SecurityConfiguration extends AbstractHttpConfigurer<SecurityConfig
         provider.setPasswordEncoder(passwordEncoder());
         provider.setUserDetailsService(userDetailsService);
         return provider;
+    }
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.authenticationProvider(daoAuthenticationProvider());
+    }
+
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
     }
 }

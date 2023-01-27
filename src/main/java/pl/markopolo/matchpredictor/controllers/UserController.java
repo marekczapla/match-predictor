@@ -21,7 +21,7 @@ import static pl.markopolo.matchpredictor.swagger.SwaggerConstants.USERS_API_TAG
 
 
 @RestController
-@RequestMapping("api/v1/users")
+@RequestMapping("/users")
 @RequiredArgsConstructor
 @Api(tags = {USERS_API_TAG})
 public class UserController {
@@ -62,7 +62,7 @@ public class UserController {
             "Allows to register an new user in the system. User information must be valid. " +
             "Username and email must be unique. The registered user obtains 'USER' role.")
     public ResponseEntity<Response> registerUser(@Valid @RequestBody UserRequest userRequest) {
-        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/v1/users").toUriString());
+        URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/users").toUriString());
         return ResponseEntity.created(uri).body(Response.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.CREATED)
